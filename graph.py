@@ -25,7 +25,7 @@ def router_decision(state):
 graph  = StateGraph(AgentState)
 
 graph.add_node("input_guard", input_guardrails)
-graph.add_node("news", news_agent)
+graph.add_node("news_agent", news_agent)
 graph.add_node("router_agent", router_agent)
 
 #graph.add_edge(START,"input_guard")
@@ -37,3 +37,7 @@ graph.add_conditional_edges("input_guard"
 
 graph.add_conditional_edges("router_agent", router_decision,
                             {"news":"news_agent"})
+
+graph.add_edge("news_agent", END)
+
+ai_assistant_compiled = graph.compile()

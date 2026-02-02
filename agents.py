@@ -1,9 +1,11 @@
+from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 from system_prompts import ROUTER_AGENT_SYSTEM_PROMPT, NEWS_SYSTEM_PROMPT
 
+load_dotenv()
 llm = ChatOpenAI(model="gpt-4.1-mini-2025-04-14")
 
 def router_agent(state):
@@ -36,4 +38,4 @@ def news_agent(state):
         }]
     })
 
-    return { "response" : result["message"][-1].content}
+    return { "response" : result["messages"][-1].content}
